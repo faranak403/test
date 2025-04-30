@@ -94,28 +94,27 @@ Here’s an example of how to use the main function, bio_logic_gp, to find a log
 
         A Boolean function derived from the genetic programming algorithm.
 
+
 ### find_thresholds
 
-    Calculates ROC-based thresholds for converting continuous features to binary.
+Calculates ROC-based thresholds for converting continuous features to binary.
 
-    Inputs:
+**Inputs**:
+- `data` (pandas.DataFrame): Dataset with continuous features and binary labels.
+- `target_name` (str): Name of the target column in the dataset.
 
-        data (pandas.DataFrame): Dataset with continuous features and binary labels.
-        target name: this is the target column name in your dataset
+**Output**:
+- Dictionary mapping feature names to their corresponding thresholds.
 
-    Output:
+**Example**:
+```python
+import pandas as pd
+from BioLogicGP.Thresholds import find_thresholds
 
-        Dictionary of thresholds for each feature The key of which is the name of the features and the value is the corresponding threshold..
-
-    Example:
-    ```python
-        from BioLogicGP.Thresholds import find_thresholds
-        import pandas as pd
-        data = pd.read_csv("path/to/your/data.csv")
-        target_name = "target name of your dataset" 
-        thresholds = find_thresholds(data, target_name)
-        print(thresholds)  # Output: ['feature1':5, 'feature1':10, ...]
-    ```
+data = pd.read_csv("data.csv")
+target_name = "target"
+thresholds = find_thresholds(data, target_name)
+print(thresholds)  # Output: {'feature1': 5.0, 'feature2': 10.0, ...}
 ### convert_dataset
 
     Converts a dataset’s features to binary based on provided thresholds.
