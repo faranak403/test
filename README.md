@@ -1,12 +1,20 @@
 # BioLogicGP package
 This package is designed to find a logical relationship between biological data such as microRNAs. However, it can be used for other types of data that are classified as binary (patient/healthy, positive/negative, spam/non-spam, etc.).
-**Install the Package**: 
-Run the following command in your terminal, replacing <path-to-whl> with the path to the .whl file:
+## Installation
+
+The `BioLogicGP` package requires Python 3.6+ and `pip`. Install it using one of the methods below.
+
+### Install from Wheel or Source File
+
+Wheel files (`.whl`) are pre-built for faster installation, while source files (`.tar.gz`) are also available.
+
+**Steps**:
+1. Run the following command,ieszcz
+
+2. Replace `<path-to-file>` with the path to the `.whl` or `.tar.gz` file:
+
 ```bash
-pip install <path-to-whl> 
-or 
-bash 
-pip install <path-to-tar-gz>
+pip install <path-to-file>
 Example:
 pip install dist/biologicgp-1.0.0-py3-none-any.whl 
 or
