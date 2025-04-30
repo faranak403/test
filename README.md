@@ -29,59 +29,60 @@ Built the distribution files:
 2. Run the following command to generate distribution files:
 ```bash
 python setup.py sdist bdist_wheel
-
+```
 This creates two files in dist directory:
 + A source distribution(.tar.jz)
 + A whell file(.whl)
 3. Install using pip with one of the generated files, as described in Methode 1:
-bash
-pip install <path-to-whl> 
+```bash
+pip install <path-to-whl>
+``` 
 or 
-bash
+```bash
 pip install <path-to-tar-gz>
 ```
 
 ## Quick Start
 The primary function for finding a Boolean function that describes the logical relationship in your data.
 
-Inputs:
+**Inputs**:
 
-    file_path (str): Path to the input data file (e.g., CSV with features and binary labels).
-    priority_d (dict): Dictionary mapping feature names to integer priorities (higher = more important).
-    number_f (int): Number of high-priority features to exclude from Boolean function derivation.
-    algorithm (str, optional): Algorithm to use (default: "gp" for genetic programming).
+- `file_path (str)`: Path to the input data file (e.g., CSV with features and binary labels).
+- `priority_d (dict)`: Dictionary mapping feature names to integer priorities (higher = more important).
+- `number_f (int)`: Number of high-priority features to exclude from Boolean function derivation.
+- `algorithm (str, optional)`: Algorithm to use (default: "gp" for genetic programming).
 
-Process:
+**Process**:
 
-    Excludes high-priority features based on number_f.
-    Computes thresholds for continuous features using ROC analysis.
-    Converts the dataset to binary format.
-    Applies the selected algorithm (genetic programming or quine mccluskey) to derive a Boolean function.
+- Excludes high-priority features based on number_f.
+- Computes thresholds for continuous features using ROC analysis.
+- Converts the dataset to binary format.
+- Applies the selected algorithm (genetic programming or quine mccluskey) to derive a Boolean function.
 
-Output:
+**Output**:
 
-    A Boolean function or model representing the logical relationship in the data.
+- A Boolean function or model representing the logical relationship in the data.
 
 Here’s an example of how to use the main function, bio_logic_gp, to find a logical relationship in a dataset:
+```python
+from BioLogicGP.BooleanFunction import bio_logic_gp
+# Load your dataset
+file_path = "path/to/your/data.csv"
 
-    from BioLogicGP.BooleanFunction import bio_logic_gp
-    # Load your dataset
-    file_path = "path/to/your/data.csv"
+# Define feature priorities (higher integer = higher priority)
+priority_dict = {"feature1": 2, "feature2": 1, "feature3": 0}
+number_f = 1
+algorithm_name = 'gp'  # or you can choose QC:Quine McCluskey
 
-    # Define feature priorities (higher integer = higher priority)
-    priority_dict = {"feature1": 2, "feature2": 1, "feature3": 0}
-    number_f = 1
-    algorithm_name = 'gp'  # or you can choose QC:Quine McCluskey
-
-    # Run the main function
-    result = bio_logic_gp(
-        file_path,
-        priority_dict,
-        number_f,       # Exclude 1 highest-priority feature from simplification
-        algorithm_name  
-    )
-    print(result)  # Output: Boolean function
-
+# Run the main function
+result = bio_logic_gp(
+    file_path,
+    priority_dict,
+    number_f,       # Exclude 1 highest-priority feature from simplification
+    algorithm_name  
+)
+print(result)  # Output: Boolean function
+```
 
 ## How to use the different functions in the package:
 
