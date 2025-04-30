@@ -115,7 +115,7 @@ Here’s an example of how to use the main function, bio_logic_gp, to find a log
         target_name = "target name of your dataset" 
         thresholds = find_thresholds(data, target_name)
         print(thresholds)  # Output: ['feature1':5, 'feature1':10, ...]
-
+    ```
 ### convert_dataset
 
     Converts a dataset’s features to binary based on provided thresholds.
