@@ -34,13 +34,9 @@ This creates two files in dist directory:
 + A source distribution(.tar.jz)
 + A whell file(.whl)
 3. Install using pip with one of the generated files, as described in Methode 1:
-```bash
-pip install <path-to-whl>
-``` 
-or 
-```bash
-pip install <path-to-tar-gz>
-```
+
+pip install <path-to-whl> or  pip install <path-to-tar-gz>
+
 
 ## Quick Start
 The primary function for finding a Boolean function that describes the logical relationship in your data.
