@@ -115,6 +115,7 @@ data = pd.read_csv("data.csv")
 target_name = "target"
 thresholds = find_thresholds(data, target_name)
 print(thresholds)  # Output: {'feature1': 5.0, 'feature2': 10.0, ...}
+```
 ### convert_dataset
 
     Converts a dataset’s features to binary based on provided thresholds.
