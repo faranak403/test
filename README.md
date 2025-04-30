@@ -35,7 +35,7 @@ This creates two files in dist directory:
 + A whell file(.whl)
 3. Install using pip with one of the generated files, as described in Methode 1:
 
-pip install <path-to-whl> or  pip install <path-to-tar-gz>
+pip install `<path-to-whl>` or  pip install `<path-to-tar-gz>`
 
 
 ## Quick Start
