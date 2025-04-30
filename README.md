@@ -1,47 +1,44 @@
 # BioLogicGP package
 This package is designed to find a logical relationship between biological data such as microRNAs. However, it can be used for other types of data that are classified as binary (patient/healthy, positive/negative, spam/non-spam, etc.).
 ## Installation
+You can install the 'BioLogicGP' package using one of the following methods. Both methods require Python 3.6 or higher and 'pip' to be installed.
 
-The `BioLogicGP` package requires Python 3.6+ and `pip`. Install it using one of the methods below.
+### Method 1: Install from Wheel File or source distribution (.whl or .tar.gz)
+The wheel file is a pre-built binary distribution, which is typically faster to install.
 
-### Install from Wheel or Source File
-
-Wheel files (`.whl`) are pre-built for faster installation, while source files (`.tar.gz`) are also available.
-
-**Steps**:
-1. Run the following command,ieszcz
-
-2. Replace `<path-to-file>` with the path to the `.whl` or `.tar.gz` file:
-
+**Install the Package**: 
+Run the following command in your terminal, replacing <path-to-whl> with the path to the .whl file:
 ```bash
-pip install <path-to-file>
+Replace `<path-to-file>` with the path to the `.whl` or `.tar.gz` file:
 Example:
+bash
 pip install dist/biologicgp-1.0.0-py3-none-any.whl 
 or
+bash
 pip install dist/biologicgp-1.0.0.tar
 
 Verify Installation: 
-Test that the package is installed correctly:
-
+Comfirm the package is installed::
+bash
 python -c "from BioLogicGP import BooleanFunction; print('Installation successful')"
 ```
-Verify Installation: Test that the package is installed correctly:
+### Method 2: Install from Source code
+Built the distribution files: 
+1. open your terminal, navigate to the directory contaimimg your setup.py file. 
+2. Run the following command to generate distribution files:
+```bash
+python setup.py sdist bdist_wheel
 
-    python -c "from BioLogicGP import BooleanFunction; print('Installation successful')"
-
-## Method 2: Install from Source code
-    built the distribution files: 
-        open your terminal, navigate to the directory contaimimg your setup.py file, and RUN:
-        python setup.py sdist bdist_wheel
-    This command will generate to two distribution files in a dist directory:
-        A source distribution(.tar.jz)
-        A whell file(.whl)
-    Install using pip install:
-    Now you can use the method 1 to install your package using the generated distribution files for example:
-        pip install <path-to-whl> 
-        or 
-        pip install <path-to-tar-gz>
-
+This creates two files in dist directory:
++ A source distribution(.tar.jz)
++ A whell file(.whl)
+3. Install using pip with one of the generated files, as described in Methode 1:
+bash
+pip install <path-to-whl> 
+or 
+bash
+pip install <path-to-tar-gz>
+```
 
 ## Quick Start
 The primary function for finding a Boolean function that describes the logical relationship in your data.
@@ -89,64 +86,70 @@ Here’s an example of how to use the main function, bio_logic_gp, to find a log
 
 ### GP_f
 
-    Directly applies the genetic programming algorithm to a binary dataset.
-
-    Inputs:
-
-        data (pandas.DataFrame): Binary dataset (all features must be 0s and 1s).
-        pop_size (int, optional): Population size for genetic programming (default: 400).
-        generations (int, optional): Number of generations (default: 80).
-        cx_prob (float, optional): Crossover probability (default: 0.5).
-        mut_prob (float, optional): Mutation probability (default: 0.2).
-
-    Output:
-
-        A Boolean function derived from the genetic programming algorithm.
-
-
-### find_thresholds
-
-Calculates ROC-based thresholds for converting continuous features to binary.
+Directly applies the genetic programming algorithm to a binary dataset.
 
 **Inputs**:
-- `data` (pandas.DataFrame): Dataset with continuous features and binary labels.
-- `target_name` (str): Name of the target column in the dataset.
+
+- `data (pandas.DataFrame)`: Binary dataset (all features must be 0s and 1s).
+- `pop_size (int, optional)`: Population size for genetic programming (default: 400).
+- `generations (int, optional)`: Number of generations (default: 80).
+- `cx_prob (float, optional)`: Crossover probability (default: 0.5).
+- `mut_prob (float, optional)`: Mutation probability (default: 0.2).
 
 **Output**:
-- Dictionary mapping feature names to their corresponding thresholds.
+
+- A Boolean function derived from the genetic programming algorithm.
 
 **Example**:
 ```python
 import pandas as pd
-from BioLogicGP.Thresholds import find_thresholds
+from BioLogicGP.GP import GP_f
 
-data = pd.read_csv("data.csv")
-target_name = "target"
+# Load binary dataset
+data = pd.read_csv("data.csv")  # Ensure all features are binary
+boolean_function = GP_f(data, pop_size=400, generations=80)
+print(boolean_function)
+```
+
+### find_thresholds
+
+Calculates ROC-based thresholds for converting continuous features to binary.
+**Inputs**:
+- `data` (pandas.DataFrame): Dataset with continuous features and binary labels.
+- `target name`: this is the target column name in your dataset
+**Output**:
+- Dictionary of thresholds for each feature The key of which is the name of the features and the value is the corresponding threshold..
+
+**Example**:
+```python
+from BioLogicGP.Thresholds import find_thresholds
+import pandas as pd
+
+data = pd.read_csv("path/to/your/data.csv")
+target_name = "target name of your dataset" 
 thresholds = find_thresholds(data, target_name)
-print(thresholds)  # Output: {'feature1': 5.0, 'feature2': 10.0, ...}
+print(thresholds)  # Output: {'feature1':5, 'feature1':10, ...}
 ```
 ### convert_dataset
+Converts a dataset’s features to binary based on provided thresholds.
 
-    Converts a dataset’s features to binary based on provided thresholds.
-
-    Inputs:
-
-        x (pandas.DataFrame): Features in your dataset.
-        y : Target column in the dataset
-        thresholds (list): Thresholds for each feature.
-
-    Output:
-
-        Binary pandas DataFrame.
-    Example:
-        from BioLogicGP.Thresholds import convert_dataset
-        import pandas as pd
-        data = pd.read_csv("path/to/your/data.csv")
-        x = data.drop(target_name, axis=1)
-        y = df[target_name]
-        binary_data = convert_dataset(data, y, thresholds)
+**Inputs**:
+- `x` (pandas.DataFrame): Features in your dataset.
+- `y` (pandas.Series): Binary target values
+- `thresholds (dict)`: Thresholds for each feature.
+**Output**:
+- Binary pandas DataFrame.
+**Example**:
+```python
+from BioLogicGP.Thresholds import convert_dataset
+import pandas as pd
+data = pd.read_csv("path/to/your/data.csv")
+x = data.drop(target_name, axis=1)
+y = df[target_name]
+binary_data = convert_dataset(data, y, thresholds)
+```
 
 # Use Cases
 
-    Biological Research: Identify logical relationships between microRNAs or other biomarkers to distinguish between healthy and diseased states.
-    General Binary Classification: Apply to any dataset with binary outcomes.
+Biological Research: Identify logical relationships between microRNAs or other biomarkers to distinguish between healthy and diseased states.
+General Binary Classification: Apply to any dataset with binary outcomes.
