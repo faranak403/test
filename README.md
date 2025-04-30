@@ -8,18 +8,19 @@ The wheel file is a pre-built binary distribution, which is typically faster to 
 
 **Install the Package**: 
 Run the following command in your terminal, replacing <path-to-whl> with the path to the .whl file:
-```bash
+
 Replace `<path-to-file>` with the path to the `.whl` or `.tar.gz` file:
 Example:
-bash
+```bash
 pip install dist/biologicgp-1.0.0-py3-none-any.whl 
+```
 or
-bash
+```bash
 pip install dist/biologicgp-1.0.0.tar
-
+```
 Verify Installation: 
 Comfirm the package is installed::
-bash
+```bash
 python -c "from BioLogicGP import BooleanFunction; print('Installation successful')"
 ```
 ### Method 2: Install from Source code
