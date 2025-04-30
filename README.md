@@ -7,9 +7,7 @@ You can install the 'BioLogicGP' package using one of the following methods. Bot
 The wheel file is a pre-built binary distribution, which is typically faster to install.
 
 **Install the Package**: 
-Run the following command in your terminal, replacing <path-to-whl> with the path to the .whl file:
-
-Replace `<path-to-file>` with the path to the `.whl` or `.tar.gz` file:
+Run the following command in your terminal, replace `<path-to-file>` with the path to the `.whl` or `.tar.gz` file:
 
 ```bash
 pip install <path-to-file> 
