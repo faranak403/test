@@ -10,6 +10,11 @@ The wheel file is a pre-built binary distribution, which is typically faster to 
 Run the following command in your terminal, replacing <path-to-whl> with the path to the .whl file:
 
 Replace `<path-to-file>` with the path to the `.whl` or `.tar.gz` file:
+
+```bash
+pip install <path-to-file> 
+```
+
 Example:
 ```bash
 pip install dist/biologicgp-1.0.0-py3-none-any.whl 
@@ -25,7 +30,7 @@ python -c "from BioLogicGP import BooleanFunction; print('Installation successfu
 ```
 ### Method 2: Install from Source code
 Built the distribution files: 
-1. open your terminal, navigate to the directory contaimimg your setup.py file. 
+1. open your terminal, navigate to the directory containing setup.py file. 
 2. Run the following command to generate distribution files:
 ```bash
 python setup.py sdist bdist_wheel
@@ -57,7 +62,7 @@ The primary function for finding a Boolean function that describes the logical r
 
 **Output**:
 
-- A Boolean function or model representing the logical relationship in the data.
+- A Boolean function representing the logical relationship in the data.
 
 Here’s an example of how to use the main function, bio_logic_gp, to find a logical relationship in a dataset:
 ```python
@@ -89,6 +94,9 @@ Directly applies the genetic programming algorithm to a binary dataset.
 **Inputs**:
 
 - `data (pandas.DataFrame)`: Binary dataset (all features must be 0s and 1s).
+- `feature_c`: The list of features column name in your dataset.
+- `target_c`: The name of the target column in your dataset.
+- `important_feature`: a list.
 - `pop_size (int, optional)`: Population size for genetic programming (default: 400).
 - `generations (int, optional)`: Number of generations (default: 80).
 - `cx_prob (float, optional)`: Crossover probability (default: 0.5).
@@ -112,9 +120,11 @@ print(boolean_function)
 ### find_thresholds
 
 Calculates ROC-based thresholds for converting continuous features to binary.
+
 **Inputs**:
 - `data` (pandas.DataFrame): Dataset with continuous features and binary labels.
 - `target name`: this is the target column name in your dataset
+
 **Output**:
 - Dictionary of thresholds for each feature The key of which is the name of the features and the value is the corresponding threshold..
 
@@ -135,8 +145,10 @@ Converts a dataset’s features to binary based on provided thresholds.
 - `x` (pandas.DataFrame): Features in your dataset.
 - `y` (pandas.Series): Binary target values
 - `thresholds (dict)`: Thresholds for each feature.
+
 **Output**:
 - Binary pandas DataFrame.
+
 **Example**:
 ```python
 from BioLogicGP.Thresholds import convert_dataset
