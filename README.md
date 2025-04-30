@@ -94,7 +94,7 @@ Directly applies the genetic programming algorithm to a binary dataset.
 - `data (pandas.DataFrame)`: Binary dataset (all features must be 0s and 1s).
 - `feature_c`: The list of features column name in your dataset.
 - `target_c`: The name of the target column in your dataset.
-- `important_feature`: a list.
+- `important_feature`: a list. The variable important_feature defaults to None. However, you can enter a list of highly important feature names that will be added to the final Boolean function as an OR.
 - `pop_size (int, optional)`: Population size for genetic programming (default: 400).
 - `generations (int, optional)`: Number of generations (default: 80).
 - `cx_prob (float, optional)`: Crossover probability (default: 0.5).
@@ -159,5 +159,5 @@ binary_data = convert_dataset(data, y, thresholds)
 
 # Use Cases
 
-Biological Research: Identify logical relationships between microRNAs or other biomarkers to distinguish between healthy and diseased states.
-General Binary Classification: Apply to any dataset with binary outcomes.
+- Biological Research: Identify logical relationships between microRNAs or other biomarkers to distinguish between healthy and diseased states.
+- General Binary Classification: Apply to any dataset with binary outcomes.
